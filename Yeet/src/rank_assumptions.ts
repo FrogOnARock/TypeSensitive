@@ -8,6 +8,7 @@ class Matrix<N extends number, M extends number> {
     }
 
 
+
     vectorProjection(vector: Vector<M>): Vector<N> | undefined {
 
         if (!(vector.values.length == this.values[0].length)) {
