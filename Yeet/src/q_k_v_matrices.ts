@@ -29,13 +29,13 @@ function makeProjection<Out>(weights: Weights[]): (Input: EmbeddingVector[]) => 
             return undefined;
         }
 
-        let outputMatrix: DotProd[][] = Array.from({length: inpRow}, () => new Array( MatRow ));
+        let outputMatrix: DotProd[][] = Array.from({ length: inpRow }, () => new Array( MatRow ));
         for (let i = 0; i < inpRow; i++) {
             for (let j = 0; j < MatRow; j++) {
                 outputMatrix[i][j] = dotProduct(Input[i], weights[j]);
             }
         }
-        return outputMatrix as QueryVec[]
+        return outputMatrix as Out[]
     }
 }
 
@@ -45,7 +45,7 @@ function makeSimilarityMatrix(Q: QueryVec[], K: KeyVec[]): DotProd[][] {
     let kLen = K.length;
 
 
-    let outputMatrix: DotProd[][] = Array.from({length: qLen}, () => new Array( kLen ));
+    let outputMatrix: DotProd[][] = Array.from({ length: qLen }, () => new Array( kLen ));
     for (let i = 0; i < qLen; i++) {
         for (let j = 0; j < kLen; j++) {
             outputMatrix[i][j] = dotProduct(Q[i], K[j]);
@@ -111,3 +111,4 @@ if (Q && K) {
     const sim = makeSimilarityMatrix(Q, K);
     console.log("Similarity:", sim);
 }
+
